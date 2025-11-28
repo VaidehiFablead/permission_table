@@ -12,7 +12,7 @@
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    
+
     <style>
         body {
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
@@ -79,17 +79,17 @@
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Full Name</label>
-                <input type="text" id="name" class="form-control" placeholder="Enter your full name">
+                <input type="text" id="name" class="form-control" >
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Email Address</label>
-                <input type="email" id="email" class="form-control" placeholder="example@mail.com">
+                <input type="email" id="email" class="form-control" >
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="******">
+                <input type="password" id="password" class="form-control" >
             </div>
 
             <button type="submit" class="btn btn-custom w-100 mt-2">
@@ -117,8 +117,7 @@
                     $("#message").html(`
                         <div class="alert alert-success">${response.message}</div>
                     `);
-
-                    $("#registerForm")[0].reset();
+                    window.location.href = "/";
                 },
                 error: function(xhr) {
                     let errors = xhr.responseJSON.errors;
