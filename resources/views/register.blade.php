@@ -12,6 +12,7 @@
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
+    
     <style>
         body {
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
