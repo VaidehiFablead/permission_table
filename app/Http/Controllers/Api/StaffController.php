@@ -14,25 +14,23 @@ class StaffController extends Controller
     {
         // 1️⃣ Validate input
         $request->validate([
-            'name'        => 'required',
-            'email'       => 'required|email|unique:users,email',
-            'password'    => 'required|min:4',
-            'permissions' => 'array',
-        ]);
+        'user_id'     => 'required|exists:users,id',
+        'permissions' => 'array'
+    ]);
 
         // 2️⃣ Create User (Staff)
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // $user = User::create([
+        //     'name'     => $request->name,
+        //     'email'    => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
 
         // 3️⃣ Insert Permissions
         if ($request->has('permissions')) {
             foreach ($request->permissions as $perm) {
 
                 UserPermission::create([
-                    'user_id'   => $user->id,
+                   'user_id'   => $request->user_id,
                     'module_id' => $perm['module_id'],
 
                     'create'    => $perm['create'] ?? 0,
@@ -45,8 +43,7 @@ class StaffController extends Controller
 
         // 4️⃣ Response
         return response()->json([
-            'message' => 'Staff created successfully!',
-            'user'    => $user
+            'message' => 'Staff created successfully!'
         ]);
     }
 }
