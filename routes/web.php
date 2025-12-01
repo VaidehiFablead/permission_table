@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,10 +15,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [UserController::class, 'login']);
-Route::get('/dashboard',[UserController::class,'dashboard'])->name('dashboard');
+
+Route::get('/', [UserController::class, 'login'])->name('login');
 Route::get('/register', [UserController::class, 'index'])->name('register');
+Route::post('/login', [UserController::class, 'authenticate'])->name('auth.login');
 
-// staff
-Route::get('/staff/create',[StaffController::class,'create'])->name('staff.create');
+// Protected routes (only for logged-in users)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 
+    // Staff module example
+    Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
+
+    // Logout
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+    // report
+    Route::get('/report', [ReportController::class, 'index'])->name('report.view');
+});

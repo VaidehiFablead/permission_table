@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -20,6 +22,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role'     => 'staff',
         ]);
 
         return response()->json([
@@ -28,8 +31,9 @@ class UserController extends Controller
         ], 201);
     }
 
-    
-    public function login(Request $request){
+
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -48,5 +52,4 @@ class UserController extends Controller
             'user' => $user,
         ], 200);
     }
-    
 }

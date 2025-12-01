@@ -26,3 +26,4 @@ Route::post('/dashboard',[UserController::class,'dashboard']);
 
 // staff
 Route::post('/staff/store', [StaffController::class, 'store']);
+Route::post('/staff/list', [StaffController::class, 'index']);
