@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Login</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -78,12 +79,12 @@
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Email Address</label>
-                <input type="email" id="email" class="form-control" >
+                <input type="email" id="email" name="email" class="form-control">
             </div>
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">Password</label>
-                <input type="password" id="password" class="form-control" >
+                <input type="password" id="password" name="password" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-custom w-100 mt-2">
@@ -91,34 +92,27 @@
             </button>
         </form>
     </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $('#loginForm').submit(function(e) {
             e.preventDefault();
 
             $.ajax({
-                url: "/api/",
+                url: "{{ route('auth.login') }}",
                 type: "POST",
                 data: {
-                    email: $("#email").val(),
-                    password: $("#password").val(),
+                    email: $('#email').val(),
+                    password: $('#password').val(),
+                    _token: $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(response) {
-                    $("#message").html(`
-                        <div class="alert alert-success">${response.message}</div>
-                    `);
-                    window.location.href = "/dashboard";
+                success: function(res) {
+                    $("#message").html(`<div class="alert alert-success">${res.message}</div>`);
+                    window.location.href = "{{ route('dashboard') }}";
                 },
                 error: function(xhr) {
-                    let errors = xhr.responseJSON.errors;
-                    let errorMessage = "";
-
-                    $.each(errors, function(key, value) {
-                        errorMessage += `<div class="alert alert-danger">${value}</div>`;
-                    });
-
-                    $("#message").html(errorMessage);
+                    $("#message").html(
+                        `<div class="alert alert-danger">${xhr.responseJSON.message}</div>`);
                 }
             });
-        })
+        });
     </script>

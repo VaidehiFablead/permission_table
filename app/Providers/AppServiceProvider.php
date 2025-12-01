@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\UserPermission;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
-use function App\Helpers\hasPermission;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,9 +23,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        App::bind('hasPermission', function () {
+        app()->bind('hasPermission', function () {
             return function ($moduleId, $action) {
-                return hasPermission($moduleId, $action);
+
+                $user = auth()->user();
+                if (!$user) return false;
+
+                // Admin = all access
+                if ($user->role == 'admin') {
+                    return true;
+                }
+
+                // Staff permissions check
+                return \App\Models\UserPermission::where('user_id', $user->id)
+                    ->where('module_id', $moduleId)
+                    ->where($action, 1)
+                    ->exists();
             };
         });
     }
