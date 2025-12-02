@@ -23,6 +23,9 @@ Route::post('/login', [UserController::class, 'authenticate'])->name('auth.login
 // Protected routes (only for logged-in users)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    // dashboard staff count
+    Route::get('/staff-count', [UserController::class, 'staffCount']);
+
 
     // Staff module example
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');

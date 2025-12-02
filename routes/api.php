@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\StaffController ;
+use App\Http\Controllers\Api\StaffController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register',[UserController::class,'store']);
-Route::post('/',[UserController::class,'login']);
-Route::post('/dashboard',[UserController::class,'dashboard']);
+Route::post('/register', [UserController::class, 'store']);
+Route::post('/', [UserController::class, 'login']);
+Route::post('/dashboard', [UserController::class, 'dashboard']);
 
 // staff
 Route::post('/staff/store', [StaffController::class, 'store']);

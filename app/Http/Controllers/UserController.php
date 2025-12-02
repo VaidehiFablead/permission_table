@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -49,6 +51,19 @@ class UserController extends Controller
         // dd($user); 
         return view('dashboard', compact('user'));
     }
+
+
+    // staff count on dashboard
+    public function staffCount()
+    {
+        $data = DB::table('users')
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as staff_count')
+            ->groupBy('date')
+            ->get();
+
+        return response()->json($data);
+    }
+
 
     // Logout
     public function logout(Request $request)
