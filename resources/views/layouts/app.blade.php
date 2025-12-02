@@ -14,6 +14,9 @@
     <!-- SB Admin 2 CSS (your local file) -->
     <link rel="stylesheet" href="{{ asset('admin/css/sb-admin-2.min.css') }}">
     <link rel="icon" type="image/jpg" href="{{ asset('admin/img/favicon.jpg') }}">
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">

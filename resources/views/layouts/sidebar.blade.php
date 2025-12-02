@@ -1,5 +1,14 @@
 <!-- Sidebar -->
-
+<style>
+   ul#accordionSidebar {
+    /* background: rgb(112, 8, 8); */
+    /* color: #000000; */
+    background: #1e555c;
+}
+.sidebar-dark .nav-item .nav-link i {
+    color: white;
+}
+</style>
 @php
     $hasPermission = app('hasPermission'); // Using helper only once
 @endphp
@@ -28,7 +37,7 @@
 
     <hr class="sidebar-divider">
 
-    <div class="sidebar-heading">Modules</div>
+    <div class="sidebar-heading text-white">Modules</div>
 
 
     {{-- ============================================================
