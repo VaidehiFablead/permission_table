@@ -1,3 +1,10 @@
+<style>
+    button.btn.btn-primary {
+    background-color: #1e555c;
+    border: none;
+}
+</style>
+
 <!-- Main Content -->
 <div id="content">
     <!-- Topbar -->

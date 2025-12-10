@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
@@ -35,4 +36,10 @@ Route::middleware(['auth'])->group(function () {
 
     // report
     Route::get('/report', [ReportController::class, 'index'])->name('report.view');
+
+
+    // ai chatbot
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+
 });

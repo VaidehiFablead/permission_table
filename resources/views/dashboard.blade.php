@@ -15,6 +15,11 @@
         background: #1e555c;
     }
 
+    button.fc-today-button.fc-button.fc-button-primary {
+        background-color: #1e555c;
+        border: none;
+    }
+
     button.fc-prev-button.fc-button.fc-button-primary,
     button.fc-next-button.fc-button.fc-button-primary {
         margin: 4px;
