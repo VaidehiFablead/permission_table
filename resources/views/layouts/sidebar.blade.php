@@ -200,6 +200,28 @@
         </li>
     @endif
 
+      @if ($hasPermission(7, 'view') )
+        <li class="nav-item {{ request()->routeIs('openAi.*') ? 'active' : '' }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#AI">
+                <i class="fas fa-chart-line"></i>
+                <span>open AI</span>
+            </a>
+
+            <div id="AI" class="collapse {{ request()->routeIs('openAi.*') ? 'show' : '' }}">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    @if ($hasPermission(6, 'view'))
+                        <a class="collapse-item" href="{{ route('chat.index') }}">
+                            {{-- {{ route('appointment.index') }} --}}
+                            Chat With me
+                        </a>
+                    @endif
+
+                </div>
+            </div>
+        </li>
+    @endif
+
     <hr class="sidebar-divider d-none d-md-block">
 
 </ul>
