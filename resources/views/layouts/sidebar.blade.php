@@ -210,7 +210,7 @@
             <div id="AI" class="collapse {{ request()->routeIs('openAi.*') ? 'show' : '' }}">
                 <div class="bg-white py-2 collapse-inner rounded">
 
-                    @if ($hasPermission(6, 'view'))
+                    @if ($hasPermission(7, 'view'))
                         <a class="collapse-item" href="{{ route('chat.index') }}">
                             {{-- {{ route('appointment.index') }} --}}
                             Chat With me
