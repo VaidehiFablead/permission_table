@@ -26,14 +26,26 @@
 @section('content')
     <h3>Clinic Chat Assistant</h3>
 
+  
+
     <div id="chat" class="chat-box mb-3">
         @foreach ($messages as $m)
             <div class="msg {{ $m->role }}">
                 <small class="text-muted">{{ $m->role }}</small>
-                <div class="p-2 bg-light rounded">{{ $m->content }}</div>
+
+                @if ($m->role == 'user')
+                    <div class="p-2 bg-primary text-white fw-bold rounded">
+                        {{ $m->content }}
+                    </div>
+                @else
+                    <div class="p-2 bg-light rounded">
+                        {{ $m->content }}
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>
+
 
     <form id="chatForm">
         <div class="input-group">

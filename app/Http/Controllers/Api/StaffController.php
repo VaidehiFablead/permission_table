@@ -14,9 +14,9 @@ class StaffController extends Controller
     {
         // 1️⃣ Validate input
         $request->validate([
-        'user_id'     => 'required|exists:users,id',
-        'permissions' => 'array'
-    ]);
+            'user_id'     => 'required|exists:users,id',
+            'permissions' => 'array'
+        ]);
 
         // 2️⃣ Create User (Staff)
         // $user = User::create([
@@ -30,7 +30,7 @@ class StaffController extends Controller
             foreach ($request->permissions as $perm) {
 
                 UserPermission::create([
-                   'user_id'   => $request->user_id,
+                    'user_id'   => $request->user_id,
                     'module_id' => $perm['module_id'],
 
                     'create'    => $perm['create'] ?? 0,
